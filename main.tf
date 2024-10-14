@@ -15,3 +15,4 @@ module "storage_account_az1" {
     min_tls_version                   = "TLS1_0"
   }
 }
+
