@@ -24,11 +24,15 @@ jobs:
       uses: hashicorp/setup-terraform@v3
       with:
         terraform_version: "0.13"
-    
-    - run: terraform init
+
+    - id: init
+      run: terraform init
 
     - id: plan
-      run: terraform plan
+      run: terraform plan -out plan.tfplan
+
+    - id: show
+      run: terraform show -json plan.tfplan > plan.tfplanjson
 
     - name: Download Wiz CLI
       run: curl -o wizcli https://downloads.wiz.io/wizcli/latest/wizcli-linux-amd64 && chmod +x wizcli
