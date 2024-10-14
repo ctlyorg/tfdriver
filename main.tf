@@ -4,7 +4,6 @@ resource "azurerm_resource_group" "example" {
 }
 
 module "storage_account_az1" {
-  #source = "git::ssh://git@code.pruconnect.net:7999/rtsretm/storage-account.git?ref=3.4.7"
   source = "github.com/ctlyorg/tfModules"
 
   resource_group_name = azurerm_resource_group.example.name
