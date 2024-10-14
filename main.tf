@@ -12,6 +12,6 @@ module "storage_account_az1" {
   settings = {
     account_tier                      = "Standard"
     account_replication_type          = "LRS"
-    min_tls_version                   = "TLS1_2"
+    min_tls_version                   = "TLS1_0"
   }
 }
