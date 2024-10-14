@@ -9,7 +9,6 @@ module "storage_account_az1" {
   resource_group_name = azurerm_resource_group.example.name
   resource_group_location = azurerm_resource_group.example.location
 
-  keyvault_id = module.keyvault_az1.keyvault_id
   settings = {
     account_tier                      = "Standard"
     account_replication_type          = "LRS"
