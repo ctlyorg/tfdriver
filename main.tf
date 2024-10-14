@@ -1,18 +1,14 @@
-module "resource_group_az1" {
-  ..<omitted>
-}
-
-module "keyvault_az1" {
-  ..<omitted>
+resource "azurerm_resource_group" "example" {
+  name     = "example-resources"
+  location = "West Europe"
 }
 
 module "storage_account_az1" {
-  source = "git::ssh://git@code.pruconnect.net:7999/rtsretm/storage-account.git?ref=3.4.7"
+  #source = "git::ssh://git@code.pruconnect.net:7999/rtsretm/storage-account.git?ref=3.4.7"
+  source = "github.com/ctlyorg/tfModules"
 
-  resource_group_name = module.resource_group_az1.name
-  app_ref             = var.app_ref
+  resource_group_name = azurerm_resource_group.example.name
 
-  keyvault_id = module.keyvault_az1.keyvault_id
   settings = {
     enable_storage_account            = "true"
     suffix                            = "001"
@@ -37,16 +33,4 @@ module "storage_account_az1" {
     blob_delete_retention_policy      = "7"
     last_access_time_enabled          = "true" - set this to true if you are using this to define lifecycle management policy
   }
-  cors_rule = [{
-    allowed_headers    = "*"
-    allowed_methods    = "GET,HEAD,OPTIONS,PUT"
-    allowed_origins    = "https://google.ga,http://localhost:4200"
-    exposed_headers    = "*"
-    max_age_in_seconds = 200
-  }]
-
-  firewall_public_ip         = data.terraform_remote_state.level2_azure_firewall.outputs.firewall_pip
-  log_analytics_workspace_id = data.terraform_remote_state.level2_hub_monitoring.outputs.la_workspace_id
-
-  resource_tags = var.resource_tags
 }
