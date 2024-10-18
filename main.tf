@@ -15,21 +15,3 @@ module "storage_account_az1" {
     min_tls_version                   = "TLS1_0"
   }
 }
-
-
-
-terraform {
-  required_version = ">= 0.14"
-  backend "local" {
-  }
-  required_providers {
-    azurerm = {
-      source  = "hashicorp/azurerm"
-      version = "~> 3.0"
-    }
-  }
-}
-
-provider "azurerm" {
-  features {}
-}
