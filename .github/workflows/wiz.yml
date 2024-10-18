@@ -47,14 +47,14 @@ jobs:
       run: ./wizcli iac scan --path $SCAN_PATH --policy "$POLICY" --format sarif | tee results.sarif
 
     - name: Upload artifact
-        uses: actions/upload-artifact@v3
-        with:
-          name: results
-          path: results.sarif
+      uses: actions/upload-artifact@v3
+      with:
+        name: results
+        path: results.sarif
           
-      - name: Optional - Upload SARIF file
-        uses: github/codeql-action/upload-sarif@v2
-        continue-on-error: false
-        with:
-          sarif_file: results.sarif
-          category: wiz
+    - name: Optional - Upload SARIF file
+      uses: github/codeql-action/upload-sarif@v2
+      continue-on-error: false
+      with:
+        sarif_file: results.sarif
+        category: wiz
